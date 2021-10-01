@@ -3,7 +3,8 @@ app = express();
 
 require("dotenv").config();
 
-app.use("/api/", require("./routes/hello"));
+/* routes */
+app.use("/api", require("./routes/hello"));
 
 // listen to port provided by our host if not avaliable listen to localhost 3001
 const PORT = process.env.PORT || 3001;

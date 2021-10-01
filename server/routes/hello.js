@@ -1,8 +1,9 @@
 const express = require("express");
-router = express.Router();
+const router = express.Router();
 
-hello = require("../controllers/hello");
+const hello = require("../controllers/hello");
 
-router.get("/", hello.hello);
+// link to controller
+router.get("/", hello.greeting);
 
 module.exports = router;

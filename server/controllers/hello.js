@@ -1,5 +1,10 @@
-exports.hello = (req, res) => {
+// a route handler
+const greeting = (req, res) => {
   res.json({
-    hello: ["poomon", "hello", "world"],
+    someText: ["poomon", "hello", "world"],
   });
+};
+
+module.exports = {
+  greeting: greeting,
 };
