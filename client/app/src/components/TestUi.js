@@ -5,18 +5,19 @@ export const TestUi = () => {
   const [initState, setInitState] = useState("");
 
   useEffect(() => {
-    fetch("/api/")
+    fetch("/api")
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
       })
-      .then((jsonResponse) => setInitState(jsonResponse));
+      .then((jsonResponse) => setInitState(jsonResponse))
+      .catch((err) => console.log());
   }, []);
 
   return (
     <>
-      <div>{initState && <div>{initState.hello}</div>}</div>
+      <div>{initState && <div>{initState.someText}</div>}</div>
     </>
   );
 };
