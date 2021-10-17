@@ -70,10 +70,19 @@ app.get("/callback", async (req, res) => {
   res.redirect("/profile");
 });
 
-app.get("/profile", (req, res) => {
-  // use Access token
+// get user profile
+app.get("/profile", async (req, res) => {
+  // use Access token (when we move to anoter file)
   const access_token = spotifyApi.getAccessToken();
   const refresh_token = spotifyApi.getRefreshToken();
+
+  try {
+    const profile = await spotifyApi.getMe();
+    console.log(profile.body);
+  } catch (e) {
+    console.log("profile page error:", e);
+  }
+
   res.send("Profile page");
 });
 
