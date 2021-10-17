@@ -12,20 +12,20 @@ app = express();
 // listen to port provided by our host if not avaliable listen to localhost 3001
 const PORT = process.env.PORT || 3001;
 
-let data;
+let secretKey;
 
 try {
   let fileContents = fs.readFileSync("./secretKey.yaml", "utf8");
-  data = yaml.load(fileContents);
+  secretKey = yaml.load(fileContents);
 } catch (err) {
   console.log(err);
 }
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
-  clientId: data.client_id,
-  clientSecret: data.client_secret,
-  redirectUri: data.redirect_uri,
+  clientId: secretKey.client_id,
+  clientSecret: secretKey.client_secret,
+  redirectUri: secretKey.redirect_uri,
 });
 
 /* routes */
@@ -45,7 +45,7 @@ app.get("/login", function (req, res) {
 });
 
 // callback from login
-app.get("/callback", function (req, res) {
+app.get("/callback", async (req, res) => {
   var code = req.query.code || null;
   var error = req.query.error || null;
 
@@ -56,20 +56,25 @@ app.get("/callback", function (req, res) {
   }
 
   // Retrieve an access token and a refresh token
-  spotifyApi
-    .authorizationCodeGrant(code)
-    .then((data) => {
-      const access_token = data.body.access_token;
-      const refresh_token = data.body.refresh_token;
+  const token = await spotifyApi.authorizationCodeGrant(code);
 
-      // Set the access token on the API object to use it in later calls
-      spotifyApi.setAccessToken(access_token);
-      spotifyApi.setRefreshToken(refresh_token);
-      console.log("access_token:", access_token);
-      console.log("refresh_token:", refresh_token);
-    })
-    .catch((err) => console.log(err));
-  res.send("successfully authentication");
+  // reassing token
+  const access_token = token.body["access_token"];
+  const refresh_token = token.body["refresh_token"];
+
+  // // Set the access token on the API object to use it in later calls
+  spotifyApi.setAccessToken(access_token);
+  spotifyApi.setRefreshToken(refresh_token);
+  console.log("successfully authentication");
+
+  res.redirect("/profile");
+});
+
+app.get("/profile", (req, res) => {
+  // use Access token
+  const access_token = spotifyApi.getAccessToken();
+  const refresh_token = spotifyApi.getRefreshToken();
+  res.send("Profile page");
 });
 
 // invoke out server to listen to a the port
