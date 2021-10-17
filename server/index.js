@@ -4,6 +4,9 @@ const yaml = require("js-yaml"); // load secret key from YAML file
 const fs = require("fs"); // fs module
 var querystring = require("querystring"); // querystring module
 
+// https://www.npmjs.com/package/spotify-web-api-node
+const SpotifyWebApi = require("spotify-web-api-node"); // spotify library
+
 app = express();
 
 // listen to port provided by our host if not avaliable listen to localhost 3001
@@ -18,28 +21,55 @@ try {
   console.log(err);
 }
 
-var client_id = data.client_id;
-var client_secret = data.client_secret;
-var redirect_uri = data.redirect_uri;
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: data.client_id,
+  clientSecret: data.client_secret,
+  redirectUri: data.redirect_uri,
+});
 
 /* routes */
 // sample routes
 app.use("/api", require("./routes/hello"));
 
-// link to spotify authentication by spotify
+// redirect to spotify authentication by spotify
 app.get("/login", function (req, res) {
-  // scope of requests authorization
-  var scope =
-    "user-read-playback-state user-modify-playback-state user-read-currently-playing";
-  res.redirect(
-    "https://accounts.spotify.com/authorize?" +
-      querystring.stringify({
-        response_type: "code",
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-      })
-  );
+  // scope of requests (what info do we need?)
+  var scopes = [
+    "user-read-playback-state",
+    "user-modify-playback-state",
+    "user-read-currently-playing",
+  ];
+
+  res.redirect(spotifyApi.createAuthorizeURL(scopes));
+});
+
+// callback from login
+app.get("/callback", function (req, res) {
+  var code = req.query.code || null;
+  var error = req.query.error || null;
+
+  // if there is an error in an authentication process
+  if (error) {
+    console.log("auth error");
+    return;
+  }
+
+  // Retrieve an access token and a refresh token
+  spotifyApi
+    .authorizationCodeGrant(code)
+    .then((data) => {
+      const access_token = data.body.access_token;
+      const refresh_token = data.body.refresh_token;
+
+      // Set the access token on the API object to use it in later calls
+      spotifyApi.setAccessToken(access_token);
+      spotifyApi.setRefreshToken(refresh_token);
+      console.log("access_token:", access_token);
+      console.log("refresh_token:", refresh_token);
+    })
+    .catch((err) => console.log(err));
+  res.send("successfully authentication");
 });
 
 // invoke out server to listen to a the port
