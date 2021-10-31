@@ -78,7 +78,9 @@ app.get("/profile", async (req, res) => {
 
   try {
     const profile = await spotifyApi.getMe();
+    const userId = profile.body.id;
     console.log(profile.body);
+    getUserPlaylists(userId);
   } catch (e) {
     console.log("profile page error:", e);
   }
@@ -90,3 +92,40 @@ app.get("/profile", async (req, res) => {
 app.listen(PORT, () => {
   console.log("listen to port:", PORT);
 });
+
+// we will move them to another file later
+const getUserPlaylists = async (UID) => {
+  try {
+    // Get a user's playlists
+    const data = await spotifyApi.getUserPlaylists(UID);
+    const playlistID = [];
+    const playlistName = [];
+
+    console.log("\n + ====== Playlists Start ===== + \n");
+    for (let playlist of data.body.items) {
+      playlistID.push(playlist.id);
+      playlistName.push(playlist.name);
+      console.log("Playlist name:", playlist.name, "Playlist id:", playlist.id);
+    }
+    console.log("\n + ====== Playlists End ===== + \n");
+    await getUserPlaylistTracks(
+      playlistName[playlistName.length - 1],
+      playlistID[playlistID.length - 1]
+    );
+  } catch (e) {
+    console.log("error on getUserPlaylists" + e);
+  }
+};
+
+const getUserPlaylistTracks = async (playlistName, playlistID) => {
+  const data = await spotifyApi.getPlaylistTracks(playlistID, {
+    offset: 1,
+    limit: 5,
+    fields: "items",
+  });
+  console.log("\n + ====== Playlist Tracks Start ===== + \n");
+  for (let track of data.body.items) {
+    console.log(track.track.name);
+  }
+  console.log("\n + ====== Playlist Tracks End ===== + \n");
+};
