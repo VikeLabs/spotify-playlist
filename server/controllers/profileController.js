@@ -13,8 +13,6 @@ const profile = async (req, res) => {
   } catch (e) {
     console.log("profile page error:", e);
   }
-
-  res.send("Profile page");
 };
 
 module.exports = {

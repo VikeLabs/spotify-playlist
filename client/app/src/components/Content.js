@@ -1,9 +1,10 @@
-import Button from "react-bootstrap/Button";
+import SampleTopPlaylistTract from "./SampleTopPlaylistTracks";
 const Content = () => {
   return (
     <>
-      <Button>Start</Button>
       <div>Body start here</div>
+      <br />
+      <SampleTopPlaylistTract />
     </>
   );
 };
