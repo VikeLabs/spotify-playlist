@@ -3,7 +3,7 @@ const SpotifyWebApi = require("spotify-web-api-node");
 const spotifyApi = new SpotifyWebApi();
 
 const profile = async (req, res) => {
-  const token = req.params.code;
+  const token = req.params.tokenCode;
   spotifyApi.setAccessToken(token);
 
   try {
@@ -13,10 +13,8 @@ const profile = async (req, res) => {
   } catch (e) {
     console.log("profile page error:", e);
   }
-};
 
-module.exports = {
-  profile: profile,
+  const data = ["poomon ", "hello ", "world."];
 };
 
 // we will move them to another file later
@@ -54,4 +52,8 @@ const getUserPlaylistTracks = async (playlistName, playlistID) => {
     console.log(track.track.name);
   }
   console.log("\n + ====== Playlist Tracks End ===== + \n");
+};
+
+module.exports = {
+  profile: profile,
 };
