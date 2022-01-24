@@ -12,7 +12,7 @@ export const TestUi = () => {
         }
       })
       .then((jsonResponse) => setInitState(jsonResponse))
-      .catch((err) => console.log());
+      .catch((err) => console.log(err));
   }, []);
 
   return (
