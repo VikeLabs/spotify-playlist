@@ -10,11 +10,13 @@ const profile = async (req, res) => {
     const profile = await spotifyApi.getMe();
     console.log(profile.body);
     await getAllUserPlaylists(profile.body.id);
+
+    res.json({
+      someText: ["profileController", profile.body.display_name],
+    });
   } catch (e) {
     console.log("profile page error:", e);
   }
-
-  const data = ["poomon ", "hello ", "world."];
 };
 
 // we will move them to another file later

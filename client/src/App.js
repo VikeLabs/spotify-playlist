@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { TestUi } from "../src/components/TestUi";
 import Content from "./components/Content";
 import NavBar from "./components/NavBar";
 

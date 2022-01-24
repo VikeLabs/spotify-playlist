@@ -1,4 +1,4 @@
-const getTopPlaylistTract = () => {
+const getTopPlaylistTrack = () => {
   const getApi = async () => {
     let response = await fetch("/api");
     response = await response.json();
@@ -8,4 +8,4 @@ const getTopPlaylistTract = () => {
   return getApi();
 };
 
-export default getTopPlaylistTract;
+export default getTopPlaylistTrack;
