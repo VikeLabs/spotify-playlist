@@ -13,27 +13,29 @@ Clone the project
   git clone https://github.com/VikeLabs/spotify-playlist.git
 ```
 
-Open two terminals
-
 Go to project directory 
 
 ```bash
   cd spotify-playlist
 ```
 
-Run Server (on one terminal)
+Installing NodeJS dependencies for Server
 
 ```bash
   cd server/
   npm install
-  npm run dev
 ```
 
-Run Client (on the second terminal)
+Installing React Dependencies for Client
 
 ```bash
   cd client/
   npm install
+```
+
+Run both Server and Client
+```bash
+  npm run dev
 ```
 
 Navigate to http://localhost:3001/login and login with your spotify account
