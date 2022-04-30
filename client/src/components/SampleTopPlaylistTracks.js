@@ -8,9 +8,7 @@ const SampleTopPlaylistTracts = () => {
       .then((res) => {
         setResult(res);
       })
-      .catch((err) =>
-        console.log("fetch Api error on SampleTopPlaylistTracks")
-      );
+      .catch((err) => console.log("SampleTopPlaylistTracks: ", err));
   }, []);
   return (
     <>
