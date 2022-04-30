@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "nodemon app",
     "client": "cd ../client && npm start",
-    "dev": "concurrently \"npm run serve\" \"npm run client\"",
+    "dev": "concurrently -n 'server,client' -c 'magenta,blue' \"npm run serve\" \"npm run client\"",
     "start": "node app"
   },
   "author": "",

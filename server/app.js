@@ -41,7 +41,7 @@ var scopes = [
 
 /* routes */
 // sample routes
-app.use("/api", require("./routes/hello"));
+app.use("/", require("./routes/hello"));
 
 // redirect to spotify authentication by spotify
 app.get("/login", function (req, res) {

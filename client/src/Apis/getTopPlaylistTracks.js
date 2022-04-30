@@ -1,7 +1,11 @@
 const getTopPlaylistTrack = () => {
   const getApi = async () => {
     let response = await fetch("/api");
-    response = await response.json();
+    try {
+      response = await response.json();
+    } catch (err) {
+      console.log("getTopPlaylistTracks: ", err);
+    }
     return response;
   };
 
