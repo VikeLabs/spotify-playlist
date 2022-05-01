@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Content from "./components/Content";
 import NavBar from "./components/NavBar";
 import AuthTokenProvider from "./util/useAuthToken";
-import { memo } from "react";
 // TODO: will replace window.location with <Navigate/> from react-router-dom
 
 function App() {
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default memo(App);
+export default App;

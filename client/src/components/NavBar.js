@@ -1,7 +1,6 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import React, { memo } from "react";
-import authentication from "../api/authentication";
+import React from "react";
 import { useAuthToken } from "../util/useAuthToken";
 
 const NavBar = () => {
@@ -29,4 +28,4 @@ const NavBar = () => {
   );
 };
 
-export default memo(NavBar);
+export default NavBar;
