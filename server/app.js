@@ -41,7 +41,7 @@ var scopes = [
 
 /* routes */
 // sample routes
-app.use("/", require("./routes/hello"));
+app.use("/api", require("./routes/hello"));
 
 // redirect to spotify authentication by spotify
 app.get("/login", function (req, res) {
@@ -76,6 +76,8 @@ app.get("/callback", async (req, res) => {
 
 // get user profile
 app.use("/profile", require("./routes/profile"));
+
+app.get("/playlistTrack", (req, res) => {});
 
 // invoke out server to listen to a the port
 app.listen(PORT, () => {

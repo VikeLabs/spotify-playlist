@@ -1,7 +1,7 @@
 // a route handler
 const greeting = (req, res) => {
   res.json({
-    someText: ["lsjdvk", "hello", "world!"],
+    someText: ["test", "hello", "world!"],
   });
 };
 
