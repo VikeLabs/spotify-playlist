@@ -6,6 +6,8 @@ const SpotifyWebApi = require("spotify-web-api-node"); // spotify library
 
 app = express();
 
+app.use(express.json());
+
 // listen to port provided by our host if not avaliable listen to localhost 3001
 const PORT = process.env.PORT || 3001;
 
@@ -77,7 +79,12 @@ app.get("/callback", async (req, res) => {
 // get user profile
 app.use("/profile", require("./routes/profile"));
 
-app.get("/playlistTrack", (req, res) => {});
+app.post("/playlistTrack", (req, res) => {
+  const token = req.body.token;
+  res.json({
+    info: "received data",
+  });
+});
 
 // invoke out server to listen to a the port
 app.listen(PORT, () => {
