@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Content from "./components/Content";
 import NavBar from "./components/NavBar";
+import AuthTokenProvider from "./util/useAuthToken";
+// TODO: will replace window.location with <Navigate/> from react-router-dom
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Content />
+      <AuthTokenProvider>
+        <NavBar />
+        <Content />
+      </AuthTokenProvider>
     </div>
   );
 }

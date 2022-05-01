@@ -1,13 +1,18 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import React, { useState } from "react";
-import login from "../Apis/login";
+import React from "react";
+import { useAuthToken } from "../util/useAuthToken";
 
 const NavBar = () => {
+  const authToken = useAuthToken();
   const loginHandler = (e) => {
     e.preventDefault();
-    login();
+    authToken.login();
   };
+  const logoutHandler = (e) => {
+    authToken.logout();
+  };
+
   return (
     <Navbar>
       <Container>
@@ -16,6 +21,7 @@ const NavBar = () => {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>Signed in as: Poomon001</Navbar.Text>
           <button onClick={loginHandler}>Login</button>
+          <button onClick={logoutHandler}>Logout</button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
