@@ -1,4 +1,5 @@
 import SampleTopPlaylistTract from "./SampleTopPlaylistTracks";
+import { memo } from "react";
 const Content = () => {
   return (
     <>
@@ -9,4 +10,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default memo(Content);

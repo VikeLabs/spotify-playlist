@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
-import getTopPlaylistTrack from "../Apis/getTopPlaylistTracks";
+import React, { useEffect, useState, memo } from "react";
+import getTopPlaylistTrack from "../api/getTopPlaylistTracks";
+import getPlaylist from "../api/getPlaylist";
+import { useAuthToken } from "../util/useAuthToken";
 
 const SampleTopPlaylistTracts = () => {
   const [result, setResult] = useState("");
+  const authToken = useAuthToken();
+  const token = authToken.token;
+
+  console.log(token);
   useEffect(() => {
-    getTopPlaylistTrack()
+    // getTopPlaylistTrack()
+    getPlaylist(token)
       .then((res) => {
         setResult(res);
       })
@@ -18,4 +25,4 @@ const SampleTopPlaylistTracts = () => {
   );
 };
 
-export default SampleTopPlaylistTracts;
+export default memo(SampleTopPlaylistTracts);
