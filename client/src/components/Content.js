@@ -1,11 +1,11 @@
-import SampleTopPlaylistTract from "./SampleTopPlaylistTracks";
+import SampleTopPlaylists from "./SampleTopPlaylists";
 
 const Content = () => {
   return (
     <>
       <div>Body start here</div>
       <br />
-      <SampleTopPlaylistTract />
+      <SampleTopPlaylists />
     </>
   );
 };
