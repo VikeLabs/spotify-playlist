@@ -1,4 +1,5 @@
 import SampleTopPlaylists from "./SampleTopPlaylists";
+import SampleTopSongs from "./SampleTopSongs";
 
 const Content = () => {
   return (
@@ -6,6 +7,7 @@ const Content = () => {
       <div>Body start here</div>
       <br />
       <SampleTopPlaylists />
+      <SampleTopSongs />
     </>
   );
 };
