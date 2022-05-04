@@ -132,6 +132,35 @@ app.post("/playlistTrack", async (req, res) => {
   });
 }); // end playlist tract
 
+// songs
+app.post("/songs", async (req, res) => {
+  const token = req.body.token;
+  console.log("+++", token);
+
+  const topSongs = [];
+
+  const spotifyApi = new SpotifyWebApi();
+  spotifyApi.setAccessToken(token);
+
+  const getTopSongs = async () => {
+    try {
+      // get top songs code
+    } catch (error) {
+      console.log("getTopSongs:", error);
+    }
+  };
+
+  try {
+    const topSongs = await getTopSongs();
+  } catch (error) {
+    console.log("songs:", error);
+  }
+
+  return res.json({
+    data: "SONGS",
+  });
+}); // end songs
+
 // invoke out server to listen to a the port
 app.listen(PORT, () => {
   console.log("listen to port:", PORT);
