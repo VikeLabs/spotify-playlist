@@ -53,4 +53,4 @@ Terminate the server and rerun
 ```
 Log back into http://localhost:3001/login using your own spotify account
 
-Navigate to the server terminal and observe the output
+Navigate to the server terminal and observe the outputs
