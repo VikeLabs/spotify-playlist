@@ -23,7 +23,7 @@ const Content = () => {
     <>
       <div>Body start here</div>
       <br />
-      <SampleTopPlaylists playlist={response.playlists} />
+      <SampleTopPlaylists playlists={response.playlists} />
     </>
   );
 };
