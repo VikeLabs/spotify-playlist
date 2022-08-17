@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
-import getPlaylist from "../api/getPlaylist";
+import getPlaylist from "../api/getUserData";
 import { useAuthToken } from "../util/useAuthToken";
 
 const SampleTopPlaylists = () => {

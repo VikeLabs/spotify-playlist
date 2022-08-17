@@ -1,5 +1,5 @@
-const getPlaylist = async (token) => {
-  let response = await fetch("/playlistTrack", {
+const getUserData = async (token) => {
+  let response = await fetch("/userData", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token: token }),
@@ -15,4 +15,4 @@ const getPlaylist = async (token) => {
   }
 };
 
-export default getPlaylist;
+export default getUserData;
