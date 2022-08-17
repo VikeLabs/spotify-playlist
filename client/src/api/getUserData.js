@@ -1,16 +1,18 @@
-const getPlaylist = async (token) => {
-  let response = await fetch("/playlistTrack", {
+const getUserData = async (token) => {
+  let response = await fetch("/userData", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token: token }),
   });
   try {
     response = await response.json();
-    return response.info;
+    console.log(response);
+    return response;
   } catch (error) {
+    response = "";
     console.log("getPlaylist:", error);
     return error;
   }
 };
 
-export default getPlaylist;
+export default getUserData;

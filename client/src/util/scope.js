@@ -1,4 +1,4 @@
-const scope = [
+const scopeList = [
   "ugc-image-upload",
   "user-read-playback-state",
   "user-modify-playback-state",
@@ -19,5 +19,7 @@ const scope = [
   "user-follow-read",
   "user-follow-modify",
 ];
+
+const scope = scopeList.join(" ");
 
 export default scope;
