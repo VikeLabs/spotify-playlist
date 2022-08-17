@@ -48,18 +48,25 @@ app.post("/userData", async (req, res) => {
   };
 
   // get playlist tracks
-  const getPlayListTracks = async (playlist) => {
-    // const data = await spotifyApi.getPlaylistTracks(playlistID, {
-    //   offset: 1,
-    //   limit: 5,
-    //   fields: "items",
-    // });
-    // console.log("\n + ====== Playlist Tracks Start ===== + \n");
-    // for (let track of data.body.items) {
-    //   console.log(track.track.name);
-    // }
-    // console.log("\n + ====== Playlist Tracks End ===== + \n");
-    console.log(playlist);
+  const getPlayListTracks = async (playlists) => {
+    const playlistIds = [];
+    const playlistNames = [];
+
+    for (let playlist of playlists) {
+      playlistIds.push(playlist.id);
+      playlistNames.push(playlist.name);
+    }
+
+    for (let playlistId of playlistIds) {
+      const tracks = await spotifyApi.getPlaylistTracks(playlistId, {
+        offset: 1,
+        limit: 5,
+        fields: "items",
+      });
+      for (let track of tracks.body.items) {
+        playlistTracks.push(track.track.name);
+      }
+    }
   };
 
   try {
@@ -75,12 +82,13 @@ app.post("/userData", async (req, res) => {
     console.log("fail to pack user data:", error);
   }
 
-  // return Promise JSon REST API
+  // return JSON API
   res.json({
     type: "user_data",
     username: username,
     id: userid,
     playlists: playlistsName,
+    playlistTracks: playlistTracks,
   });
 }); // end get user data
 
