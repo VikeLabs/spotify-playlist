@@ -6,8 +6,10 @@ const getPlaylist = async (token) => {
   });
   try {
     response = await response.json();
-    return response.info;
+    console.log(response);
+    return response;
   } catch (error) {
+    response = "";
     console.log("getPlaylist:", error);
     return error;
   }

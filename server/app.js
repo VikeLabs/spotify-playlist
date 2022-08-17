@@ -12,7 +12,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 
 // credentials are optional
-var spotifyApi = new SpotifyWebApi({
+var tempSpotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.SECRET_KEY,
   redirectUri: process.env.REDIRECT_URL,
@@ -47,7 +47,7 @@ app.use("/api", require("./routes/hello"));
 
 // redirect to spotify authentication by spotify
 app.get("/login", function (req, res) {
-  res.redirect(spotifyApi.createAuthorizeURL(scopes));
+  res.redirect(tempSpotifyApi.createAuthorizeURL(scopes));
 });
 
 // callback from login
@@ -64,27 +64,73 @@ app.get("/callback", async (req, res) => {
   }
 
   // Retrieve an access token and a refresh token
-  const token = await spotifyApi.authorizationCodeGrant(code);
+  const token = await tempSpotifyApi.authorizationCodeGrant(code);
 
   // reassing token
   const access_token = token.body["access_token"];
   const refresh_token = token.body["refresh_token"];
 
   // // Set the access token on the API object to use it in later calls
-  spotifyApi.setAccessToken(access_token);
-  spotifyApi.setRefreshToken(refresh_token);
+  tempSpotifyApii.setAccessToken(access_token);
+  tempSpotifyApi.setRefreshToken(refresh_token);
   res.redirect(`/profile/${access_token}`);
 });
 
 // get user profile
 app.use("/profile", require("./routes/profile"));
 
-app.post("/playlistTrack", (req, res) => {
+// playlistTrack
+app.post("/playlistTrack", async (req, res) => {
   const token = req.body.token;
+  console.log(token);
+
+  let username = "";
+  let userid = "";
+  const playlistsName = [];
+
+  const spotifyApi = new SpotifyWebApi();
+  spotifyApi.setAccessToken(token);
+
+  // get user profile
+  const getProfileID = async () => {
+    try {
+      const profile = await spotifyApi.getMe();
+      return profile;
+    } catch (error) {
+      console.log("profile:", error);
+    }
+  };
+
+  // get user playlists
+  const getAllUserPlaylists = async (UID) => {
+    try {
+      const playlists = await spotifyApi.getUserPlaylists(UID);
+      return playlists.body.items;
+    } catch (error) {
+      console.log("playlists:", error);
+    }
+  };
+
+  try {
+    const profile = await getProfileID(token);
+    userid = profile.body.id;
+    username = profile.body.display_name;
+    const playlists = await getAllUserPlaylists(userid);
+    playlists.map((playlist) => {
+      playlistsName.push(playlist.name);
+    });
+  } catch (error) {
+    console.log("playlistTrack:", error);
+  }
+
+  // return Promise JSon REST API
   res.json({
-    info: "received data",
+    type: "playlists",
+    username: username,
+    id: userid,
+    playlists: playlistsName,
   });
-});
+}); // end playlist tract
 
 // invoke out server to listen to a the port
 app.listen(PORT, () => {
