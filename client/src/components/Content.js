@@ -2,6 +2,7 @@ import SampleTopPlaylists from "./SampleTopPlaylists";
 import { useAuthToken } from "../util/useAuthToken";
 import React, { useEffect, useState } from "react";
 import getUserData from "../api/getUserData";
+import UserName from "./UserName";
 
 const Content = () => {
   const [response, setResponse] = useState("");
@@ -23,7 +24,10 @@ const Content = () => {
     <>
       <div>Body start here</div>
       <br />
+      <UserName username={response.username} />
+      <br />
       <SampleTopPlaylists playlists={response.playlists} />
+      <br />
     </>
   );
 };
