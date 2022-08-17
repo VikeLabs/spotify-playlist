@@ -1,30 +1,12 @@
-import React, { useEffect, useState, memo } from "react";
-import getPlaylist from "../api/getPlaylist";
-import { useAuthToken } from "../util/useAuthToken";
+import React, { memo } from "react";
 
-const SampleTopPlaylists = () => {
-  const [result, setResult] = useState("");
-  const authToken = useAuthToken();
-  const token = authToken.token;
-
-  useEffect(() => {
-    if (token) {
-      getPlaylist(token)
-        .then((response) => {
-          setResult(response);
-        })
-        .catch((err) => console.log("SampleTopPlaylistTracks: ", err));
-    }
-  }, [token]);
-  // }, []);
+const SampleTopPlaylists = ({ playlists }) => {
   return (
     <>
       <h3>Sample Top Playlist</h3>
-      {result && <h5>{result.type}</h5>}
-      {result && <div>{result.username}</div>}
-      {result && (
+      {playlists && (
         <div>
-          {result.playlists.map((playlist, index) => (
+          {playlists.map((playlist, index) => (
             <li key={index}>{playlist}</li>
           ))}
         </div>
