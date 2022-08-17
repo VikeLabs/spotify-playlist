@@ -16,7 +16,7 @@ const SampleTopPlaylists = () => {
         .catch((err) => console.log("SampleTopPlaylistTracks: ", err));
     }
   }, [token]);
-  // }, []);
+
   return (
     <>
       <h3>Sample Top Playlist</h3>

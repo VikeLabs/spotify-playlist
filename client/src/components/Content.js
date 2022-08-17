@@ -1,5 +1,6 @@
 import SampleTopPlaylists from "./SampleTopPlaylists";
-import SampleTopSongs from "./SampleTopSongs";
+import { useAuthToken } from "../util/useAuthToken";
+import React, { useEffect } from "react";
 
 const Content = () => {
   return (
@@ -7,7 +8,6 @@ const Content = () => {
       <div>Body start here</div>
       <br />
       <SampleTopPlaylists />
-      <SampleTopSongs />
     </>
   );
 };
