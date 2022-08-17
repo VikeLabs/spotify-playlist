@@ -3,6 +3,7 @@ import { useAuthToken } from "../util/useAuthToken";
 import React, { useEffect, useState } from "react";
 import getUserData from "../api/getUserData";
 import UserName from "./UserName";
+import SampleTracks from "./SampleTracks";
 
 const Content = () => {
   const [response, setResponse] = useState("");
@@ -28,6 +29,7 @@ const Content = () => {
       <br />
       <SampleTopPlaylists playlists={response.playlists} />
       <br />
+      <SampleTracks sampleTracks={response.playlistTracks} />
     </>
   );
 };
