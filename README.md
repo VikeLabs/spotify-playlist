@@ -33,17 +33,17 @@ Installing React Dependencies for Client
   npm install
 ```
 
-Run both Server and Client
+Run Server
 ```bash
   npm run dev
 ```
 
-Navigate to http://localhost:3001/login and login with your spotify account
+Navigate to http://localhost:3000/login and login with your spotify account
 Note: if you are unable to do so, login using admin credentials (provided by team lead)
 - then navigate to developer.spotify.com and under Settings > User and Access add your own spotify account to become a developer
 
 Importing env
- - (If needed) Open a new terminal and navigate to server
+ - (If needed) Open a new terminal and navigate to server/
  - Create a .env file and paste the correct credentials within it (provided by team lead)
  
 Terminate the server and rerun 
@@ -51,6 +51,6 @@ Terminate the server and rerun
 ```bash
  npm run dev
 ```
-Log back into http://localhost:3001/login using your own spotify account
+Log back into http://localhost:3000/login using your own Spotify account
 
 Navigate to the server terminal and observe the outputs
