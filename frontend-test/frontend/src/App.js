@@ -7,13 +7,13 @@ import './App.css';
 function App() {
   return (
     // Background
-    <div className='w-full h-screen bg-gradient-to-b from-purple-500 to-blue-500'>
+    <div className='w-full h-screen bg-gradient-to-b from-[#E6E7FD]  via-[#E6E7FD7D] to-[#E6E7FD]'>
       {/* Navbar header */}
      <nav className='flex flex-row font-medium w-screen h-[12vh]'>
 
 
         <div className='h-full grow-[2] block text-center ml-[-10rem]'>
-          <h1 className='font-bold text-[67px] '>VIKESPLAYLISTS</h1>
+          <h1 className='font-bold text-[67px] font-header'>VIKESPLAYLISTS</h1>
         </div>
 
 
@@ -23,7 +23,7 @@ function App() {
                 {NavItems.map((item, index) => {
                     return(
                       <li key={index} className='inline-block content-center'>
-                        <a className='block text-xl text-[#F6F9FF] p-1 py-[1.5rem] px-[3.5rem] mr-8 bg-[#4B5584] text-[35px] rounded-[10px] hover:bg-gray-400 shadow-md' href={item.url}>
+                        <a className='block text-xl text-[#F6F9FF] p-1 py-[1.5rem] px-[3.5rem] mr-8 bg-[#4B5584] text-[35px] rounded-[10px] hover:bg-gray-400 shadow-md font-header' href={item.url}>
                           {item.title}
                         </a>
                       </li>
@@ -57,8 +57,8 @@ function App() {
         </div>
         <div className='w-6/12 h-6/12 bg-gradient-to-b from-pink-300 to-orange-500 inline-block'>
             <div className='my-0 mx-auto'>
-              <h1 className='text-5xl font-bold'>Welcome!</h1>
-              <p className='text-lg'>
+              <h1 className='text-5xl font-bold font-header'>Welcome!</h1>
+              <p className='text-lg font-body'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. 
               </p>
               <div><a href ='https://www.lttstore.com'>Sign In!</a></div>
