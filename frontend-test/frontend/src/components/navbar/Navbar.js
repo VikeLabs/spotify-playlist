@@ -1,5 +1,6 @@
 import React from "react";
 import { NavItems } from "./NavItems";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return(
@@ -9,9 +10,9 @@ const Navbar = () => {
               {NavItems.map((item, index) => {
                   return(
                     <li key={index} className='inline-block content-center'>
-                      <a className={'block text-xl text-[#F6F9FF] p-4 py-[1.5rem] px-[3.5rem] mr-8 bg-[#4B5584] rounded-[10px] hover:bg-gray-400 shadow-md font-header'} href={item.url} target='_blank'>
+                      <Link className={'block text-xl text-[#F6F9FF] p-4 py-[1.5rem] px-[3.5rem] mr-8 bg-[#4B5584] rounded-[10px] hover:bg-gray-400 shadow-md font-header'} to={item.url}>
                         {item.title}
-                      </a>
+                      </Link>
                     </li>
                   )
               })}
