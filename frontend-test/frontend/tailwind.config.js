@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     fontFamily:{
       header:['Helvetica', 'Arial', 'sans-serif'],
-      body:['Open Sans', 'Arial', 'sans-serif'],
-      button:['Inter', 'Open Sans', 'Arial']
+      body:['"Open Sans"', 'Arial', 'sans-serif'],
+      button:['Inter', '"Open Sans"', 'Arial']
     },
     extend: {},
   },
